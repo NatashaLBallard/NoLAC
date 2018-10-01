@@ -1,9 +1,11 @@
 package com.nolac.demo.config;
 
+import com.nolac.demo.contact.Contact;
 import com.nolac.demo.model.AppUser;
 import com.nolac.demo.model.AppRole;
 import com.nolac.demo.repositories.AppRoleRepository;
 import com.nolac.demo.repositories.AppUserRepository;
+import com.nolac.demo.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -79,6 +81,55 @@ public class MainController {
     {
         return "logout";
     }
+
+
+
+
+
+    //Contact Information
+
+    @Autowired
+    ContactRepository contactRepository;
+
+    @RequestMapping("/viewcontact")
+    public String listContactInformation(Model model) {
+        model.addAttribute("contacts", contactRepository.findAll());
+        return "contact";
+    }
+
+    @GetMapping("/addcontact")
+    public String contactForm(Model model) {
+        model.addAttribute("contact", new Contact());
+        return "contactform";
+    }
+
+    @PostMapping("/processcontact")
+    public String processContactForm(@Valid Contact contact, BindingResult result) {
+        if (result.hasErrors()) {
+            return "contactform";
+        }
+        contactRepository.save(contact);
+        return "redirect:/viewcontact";
+    }
+
+
+    @RequestMapping("/detail-contact/{id}")
+    public String showContactInformation(@PathVariable("id") long id, Model model) {
+        model.addAttribute("contact", contactRepository.findById(id));
+        return "showcontact";
+    }
+
+    @RequestMapping("/update-contact/{id}")
+    public String updateContactInformation(@PathVariable("id") long id, Model model){
+        model.addAttribute("contact", contactRepository.findById(id));
+        return "contactform";
+    }
+
+//    @RequestMapping("/delete-contact/{id}")
+//    public String deleteContactInformation(@PathVariable("id") long id){
+//        contactRepository.delete(id);
+//        return "redirect:/";
+//    }
 
 
 

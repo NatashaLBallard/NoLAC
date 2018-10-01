@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Display of Contact</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" />
+
+
+</head>
+<body>
+<div th:replace="base :: navbarmenu"></div><br/><br/>
+
+
+<a href="/viewcontact">Show All Contact Information</a><br/><br/>
+
+
+<h2>Contact Information</h2>
+<span><img th:src="(${contact.image}==null)?'http://simpleicon.com/wp-content/uploads/user1.png':${contact.image}" alt="logo/face pic" width="100px" height="100px"/></span><br/>
+<span th:text="${contact.name}"></span><br/>
+<a th:href="@{'mailto:'+${contact.email}}" target="_blank"><span th:text="${contact.email}"></span></a><br/>
+<a th:href="@{'//'+${contact.linkedin}}" target="_blank"><span th:text="${contact.linkedin}"></span></a><br/>
+<a th:href="@{'//'+${contact.github}}" target="_blank"><span th:text="${contact.github}"></span></a><br/>
+<a th:href="@{'//'+${contact.twitter}}" target="_blank"><span th:text="${contact.twitter}"></span></a><br/>
+<br/>
+
+
+</body>
+</html>

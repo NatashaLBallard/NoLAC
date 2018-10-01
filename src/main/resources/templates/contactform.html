@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Contact Form</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" />
+
+
+</head>
+<body>
+<!--<div th:replace="base :: navbarmenu"></div>-->
+
+
+
+<form action="#"
+      th:action="@{/processcontact}"
+      th:object="${contact}"
+      method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <h2>Contact</h2>
+    Name: <input type="text" th:field="*{name}" />
+    <span th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"></span><br/>
+
+    Email: <input type="text" th:field="*{email}" />
+    <span th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}"></span><br/>
+
+    LinkedIn: <input type="text" th:field="*{linkedin}" />
+    <span th:if="${#fields.hasErrors('linkedin')}"
+          th:errors="*{linkedin}"></span><br/>
+
+    GitHub: <input type="text" th:field="*{github}" />
+    <span th:if="${#fields.hasErrors('github')}"
+          th:errors="*{github}"></span><br/>
+
+    Twitter: <input type="text" th:field="*{twitter}" />
+    <span th:if="${#fields.hasErrors('twitter')}"
+          th:errors="*{twitter}"></span><br/>
+    <br/>
+
+    Image: <input type="url" th:field="*{image}" />
+    <span th:if="${#fields.hasErrors('image')}"
+          th:errors="*{image}"></span><br/>
+    <br/>
+
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>
